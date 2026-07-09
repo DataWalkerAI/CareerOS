@@ -7,6 +7,7 @@
 - Learning Manager with LocalStorage CRUD, search, category/status filters, and dashboard stats.
 - Universal Learning detail page.
 - Learning topic workspace with debounced autosave, keyboard save, notes, current focus, resource cards, practice progress, toasts, and last study tracking.
+- Interview Center with LocalStorage CRUD, review mode, search, filters, sorting, dashboard stats, and Learning topic links.
 
 ## Next
 

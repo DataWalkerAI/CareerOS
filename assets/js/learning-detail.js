@@ -246,6 +246,7 @@ window.LearningDetail = (() => {
     }
 
     const workspaceForm = document.querySelector(selectors.workspaceForm);
+    const interviewLink = document.querySelector("[data-topic-interview-link]");
 
     document.title = `${topic.title} | CareerOS`;
     setText("[data-topic-title]", topic.title);
@@ -254,6 +255,10 @@ window.LearningDetail = (() => {
     setText("[data-topic-category]", topic.category);
     setText("[data-topic-status]", topic.status);
     renderSummary();
+
+    if (interviewLink) {
+      interviewLink.href = `../Interview/index.html?topic=${encodeURIComponent(topic.title)}`;
+    }
 
     if (workspaceForm) {
       workspaceForm.elements.currentFocus.value = topic.currentFocus || "";

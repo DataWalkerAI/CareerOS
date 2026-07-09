@@ -2,6 +2,7 @@ window.CareerStorage = (() => {
   const jobsKey = "careeros.jobs";
   const tasksKey = "careeros.tasks";
   const learningKey = "careeros.learning";
+  const interviewKey = "careeros.interview";
   const seedTimestamp = "2026-07-09T00:00:00.000Z";
 
   const seedJobs = [
@@ -396,6 +397,60 @@ window.CareerStorage = (() => {
     },
   ];
 
+  const seedInterview = [
+    {
+      id: "interview-tell-me-about-yourself",
+      question: "Tell me about yourself.",
+      category: "Behavioral",
+      difficulty: "Easy",
+      answer:
+        "Give a concise career summary, connect your experience to the role, and end with why this opportunity fits your next step.",
+      personalAnswer:
+        "I am building toward IT coordinator roles with a focus on support, structured troubleshooting, Microsoft 365, Windows, and user-focused service.",
+      notes: "Keep it under two minutes and connect to the job description.",
+      tags: ["intro", "behavioral"],
+      status: "Need Practice",
+      source: "Common interview question",
+      lastReviewed: "",
+      createdAt: seedTimestamp,
+      updatedAt: seedTimestamp,
+    },
+    {
+      id: "interview-dns-troubleshooting",
+      question: "How would you troubleshoot a DNS issue?",
+      category: "Technical",
+      difficulty: "Medium",
+      answer:
+        "Confirm scope, test name resolution, compare IP connectivity, inspect DNS settings, clear cache, query known resolvers, and check records or service status.",
+      personalAnswer:
+        "I would first confirm whether the issue affects one device, one user, or a wider network, then test ping by IP versus hostname and inspect DNS configuration.",
+      notes: "Use a clear step-by-step support workflow.",
+      tags: ["networking", "dns", "troubleshooting"],
+      status: "Need Practice",
+      source: "Networking topic",
+      lastReviewed: "",
+      createdAt: seedTimestamp,
+      updatedAt: seedTimestamp,
+    },
+    {
+      id: "interview-prioritize-tickets",
+      question: "How do you prioritize multiple support tickets?",
+      category: "Support",
+      difficulty: "Medium",
+      answer:
+        "Prioritize by business impact, urgency, affected users, SLA, dependencies, and safety. Communicate expectations and update stakeholders.",
+      personalAnswer:
+        "I would separate urgent incidents from routine requests, handle blockers first, and keep users updated with realistic next steps.",
+      notes: "Mention calm communication and documentation.",
+      tags: ["support", "prioritization"],
+      status: "New",
+      source: "Helpdesk workflow",
+      lastReviewed: "",
+      createdAt: seedTimestamp,
+      updatedAt: seedTimestamp,
+    },
+  ];
+
   function createSlug(value) {
     return window.CareerUtils.createSlug(value, "topic");
   }
@@ -465,6 +520,39 @@ window.CareerStorage = (() => {
     });
   }
 
+  function normalizeTags(tags) {
+    if (Array.isArray(tags)) {
+      return tags.map((tag) => String(tag).trim()).filter(Boolean);
+    }
+
+    return String(tags || "")
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+  }
+
+  function normalizeInterviewQuestions(questions) {
+    return questions.map((question) => {
+      const now = question.createdAt || seedTimestamp;
+
+      return {
+        id: question.id || window.CareerUtils.createId("interview"),
+        question: question.question || "Untitled interview question",
+        category: question.category || "General",
+        difficulty: question.difficulty || "Medium",
+        answer: question.answer || "",
+        personalAnswer: question.personalAnswer || "",
+        notes: question.notes || "",
+        tags: normalizeTags(question.tags),
+        status: question.status || "New",
+        source: question.source || "",
+        lastReviewed: question.lastReviewed || "",
+        createdAt: question.createdAt || now,
+        updatedAt: question.updatedAt || now,
+      };
+    });
+  }
+
   function readJobs() {
     try {
       const storedJobs = JSON.parse(localStorage.getItem(jobsKey));
@@ -524,12 +612,35 @@ window.CareerStorage = (() => {
     localStorage.setItem(learningKey, JSON.stringify(enrichLearningTopics(learning)));
   }
 
+  function readInterview() {
+    try {
+      const storedInterview = JSON.parse(localStorage.getItem(interviewKey));
+
+      if (Array.isArray(storedInterview)) {
+        const normalizedInterview = normalizeInterviewQuestions(storedInterview);
+        saveInterview(normalizedInterview);
+        return normalizedInterview;
+      }
+    } catch (error) {
+      console.warn("CareerOS could not read interview questions from LocalStorage.", error);
+    }
+
+    saveInterview(seedInterview);
+    return seedInterview;
+  }
+
+  function saveInterview(interview) {
+    localStorage.setItem(interviewKey, JSON.stringify(normalizeInterviewQuestions(interview)));
+  }
+
   return {
     readJobs,
     readTasks,
     readLearning,
+    readInterview,
     saveJobs,
     saveTasks,
     saveLearning,
+    saveInterview,
   };
 })();

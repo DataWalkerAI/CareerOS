@@ -5,6 +5,7 @@ window.CareerDashboard = (() => {
     jobs: [],
     tasks: [],
     learning: [],
+    interview: [],
   };
 
   function formatValue(value) {
@@ -40,6 +41,10 @@ window.CareerDashboard = (() => {
     if (Array.isArray(nextState.learning)) {
       dashboardState.learning = nextState.learning;
     }
+
+    if (Array.isArray(nextState.interview)) {
+      dashboardState.interview = nextState.interview;
+    }
   }
 
   function setStat(key, value) {
@@ -58,12 +63,14 @@ window.CareerDashboard = (() => {
     }
   }
 
-  function updateStats(jobs, tasks, learning) {
+  function updateStats(jobs, tasks, learning, interview) {
     const activeJobs = jobs.filter((job) => activeStatuses.includes(job.status));
-    const interviews = jobs.filter((job) => job.status === "Interview");
+    const jobInterviews = jobs.filter((job) => job.status === "Interview");
     const offers = jobs.filter((job) => job.status === "Offer");
     const openTasks = tasks.filter((task) => !task.completed);
     const completedTasks = tasks.length - openTasks.length;
+    const masteredQuestions = interview.filter((item) => item.status === "Mastered");
+    const practiceQuestions = interview.filter((item) => item.status !== "Mastered");
     const completedLearning = learning.filter(
       (topic) => topic.status === "Completed",
     );
@@ -75,10 +82,14 @@ window.CareerDashboard = (() => {
       : 0;
 
     setStat("applications", activeJobs.length);
-    setStat("interviews", interviews.length);
+    setStat("interviews", practiceQuestions.length);
     setStat("offers", offers.length);
     setStat("tasks", openTasks.length);
     setStat("learning", `${averageLearning}%`);
+    setStatLabel(
+      "interviews",
+      `${masteredQuestions.length} mastered, ${jobInterviews.length} job interviews`,
+    );
     setStatLabel("tasks", `${completedTasks} completed`);
     setStatLabel("learning", `${completedLearning.length} completed`);
   }
@@ -130,6 +141,7 @@ window.CareerDashboard = (() => {
       dashboardState.jobs,
       dashboardState.tasks,
       dashboardState.learning,
+      dashboardState.interview,
     );
     updateCurrentJob(dashboardState.jobs);
   }

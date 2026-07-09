@@ -17,6 +17,7 @@
     <script defer src="assets/js/dashboard.js"></script>
     <script defer src="assets/js/jobs.js"></script>
     <script defer src="assets/js/learning.js"></script>
+    <script defer src="assets/js/interview.js"></script>
     <script defer src="assets/js/tasks.js"></script>
     <script defer src="assets/js/app.js"></script>
     <script
@@ -53,6 +54,12 @@
             <li>
               <a href="#learning"
                 ><i class="fa-solid fa-graduation-cap"></i>Learning</a
+              >
+            </li>
+
+            <li>
+              <a href="#interview"
+                ><i class="fa-solid fa-comments"></i>Interview</a
               >
             </li>
 
@@ -105,7 +112,7 @@
           <div class="card">
             <h3>Interviews</h3>
             <strong data-stat="interviews">0</strong>
-            <small>No interviews scheduled</small>
+            <small data-stat-label="interviews">Need practice</small>
           </div>
           <div class="card">
             <h3>Offers</h3>
@@ -430,6 +437,146 @@
             </div>
 
             <div class="tasks-list" data-tasks-list aria-live="polite"></div>
+          </section>
+
+          <section id="interview" class="panel panel-wide">
+            <h2>Interview Center</h2>
+
+            <div class="interview-layout">
+              <article class="interview-review">
+                <h3>Review Mode</h3>
+                <div data-review-card aria-live="polite"></div>
+              </article>
+
+              <article class="interview-editor">
+                <form class="interview-form" data-interview-form>
+                  <input type="hidden" name="interviewId" />
+
+                  <div class="interview-form-grid">
+                    <div class="form-field interview-form-wide">
+                      <label for="interview-question">Question</label>
+                      <input id="interview-question" name="question" type="text" required />
+                    </div>
+
+                    <div class="form-field">
+                      <label for="interview-category">Category</label>
+                      <select id="interview-category" name="category" required>
+                        <option value="Behavioral">Behavioral</option>
+                        <option value="Technical">Technical</option>
+                        <option value="Support">Support</option>
+                        <option value="Situational">Situational</option>
+                        <option value="Company">Company</option>
+                        <option value="General">General</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="interview-difficulty">Difficulty</label>
+                      <select id="interview-difficulty" name="difficulty" required>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="interview-status">Status</label>
+                      <select id="interview-status" name="status" required>
+                        <option value="New">New</option>
+                        <option value="Need Practice">Need Practice</option>
+                        <option value="In Review">In Review</option>
+                        <option value="Mastered">Mastered</option>
+                      </select>
+                    </div>
+
+                    <div class="form-field interview-form-wide">
+                      <label for="interview-answer">Model answer</label>
+                      <textarea id="interview-answer" name="answer" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-field interview-form-wide">
+                      <label for="interview-personal-answer">Personal answer</label>
+                      <textarea id="interview-personal-answer" name="personalAnswer" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-field interview-form-wide">
+                      <label for="interview-notes">Notes</label>
+                      <textarea id="interview-notes" name="notes" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-field">
+                      <label for="interview-tags">Tags</label>
+                      <input id="interview-tags" name="tags" type="text" placeholder="dns, support" />
+                    </div>
+
+                    <div class="form-field interview-form-source">
+                      <label for="interview-source">Source</label>
+                      <input id="interview-source" name="source" type="text" />
+                    </div>
+                  </div>
+
+                  <div class="form-actions">
+                    <button class="button" type="submit" data-interview-submit>
+                      Add question
+                    </button>
+                    <button class="button button-secondary" type="button" data-interview-reset>
+                      Clear
+                    </button>
+                    <a class="button button-secondary" href="Interview/index.html">
+                      Open Interview Center
+                    </a>
+                  </div>
+                </form>
+
+                <div class="interview-toolbar" aria-label="Interview filters">
+                  <div class="form-field">
+                    <label for="interview-search">Search</label>
+                    <input
+                      id="interview-search"
+                      data-interview-search
+                      type="search"
+                      placeholder="Question, answer, tag"
+                    />
+                  </div>
+
+                  <div class="form-field">
+                    <label for="interview-filter-category">Category</label>
+                    <select id="interview-filter-category" data-interview-category-filter>
+                      <option value="All">All categories</option>
+                      <option value="Behavioral">Behavioral</option>
+                      <option value="Technical">Technical</option>
+                      <option value="Support">Support</option>
+                      <option value="Situational">Situational</option>
+                      <option value="Company">Company</option>
+                      <option value="General">General</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="interview-filter-status">Status</label>
+                    <select id="interview-filter-status" data-interview-status-filter>
+                      <option value="All">All statuses</option>
+                      <option value="New">New</option>
+                      <option value="Need Practice">Need Practice</option>
+                      <option value="In Review">In Review</option>
+                      <option value="Mastered">Mastered</option>
+                    </select>
+                  </div>
+
+                  <div class="form-field">
+                    <label for="interview-sort">Sort</label>
+                    <select id="interview-sort" data-interview-sort>
+                      <option value="updated-desc">Recently updated</option>
+                      <option value="question-asc">Question A-Z</option>
+                      <option value="difficulty-asc">Difficulty</option>
+                      <option value="reviewed-asc">Least reviewed</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="interview-list" data-interview-list aria-live="polite"></div>
+              </article>
+            </div>
           </section>
 
           <section id="skills" class="panel">

@@ -25,6 +25,10 @@ window.LearningManager = (() => {
     return `Learning/topic.html?id=${encodeURIComponent(topic.id)}`;
   }
 
+  function getInterviewUrl(topic) {
+    return `Interview/index.html?topic=${encodeURIComponent(topic.title)}`;
+  }
+
   function resourcesToText(resources) {
     if (Array.isArray(resources)) {
       return resources
@@ -201,6 +205,9 @@ window.LearningManager = (() => {
             <div class="learning-card-actions">
               <a class="button button-small" href="${window.CareerUtils.escapeHtml(getTopicUrl(topic))}">
                 Open
+              </a>
+              <a class="button button-secondary button-small" href="${window.CareerUtils.escapeHtml(getInterviewUrl(topic))}">
+                Interview
               </a>
               <button class="button button-secondary button-small" type="button" data-learning-edit="${window.CareerUtils.escapeHtml(topic.id)}">
                 Edit

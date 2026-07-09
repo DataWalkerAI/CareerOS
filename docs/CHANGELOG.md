@@ -1,5 +1,13 @@
 # Changelog
 
+## Sprint 6.0 - Interview Center
+
+- Added Interview Center with CRUD question management, review mode, search, filters, and sorting.
+- Added `Interview/index.html` for the question bank and `Interview/question.html` for focused question review/editing.
+- Added `careeros.interview` LocalStorage support with normalized interview question records.
+- Added dashboard interview statistics for questions needing practice and mastered questions.
+- Added Learning topic links that open related interview questions.
+
 ## Sprint 5.4 - UX Polish & Autosave
 
 - Removed the manual Learning workspace save button and replaced it with 500ms debounced autosave.

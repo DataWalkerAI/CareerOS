@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interview Question | CareerOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script defer src="../assets/js/utils.js"></script>
+    <script defer src="../assets/js/storage.js"></script>
+    <script defer src="../assets/js/interview-detail.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6dcb0c1b0b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-comment-dots"></i>
+          </div>
+
+          <div class="logo-text">
+            <h2>CareerOS</h2>
+            <p>Interview Question</p>
+          </div>
+        </div>
+
+        <nav aria-label="Interview question navigation">
+          <ul>
+            <li>
+              <a href="index.html"
+                ><i class="fa-solid fa-arrow-left"></i>Back to Interview</a
+              >
+            </li>
+            <li>
+              <a href="../index.html#dashboard"
+                ><i class="fa-solid fa-chart-line"></i>Dashboard</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <hr />
+
+        <div class="sidebar-footer">CareerOS v1.1</div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 data-question-title>Interview Question</h1>
+            <p data-question-subtitle>CareerOS interview workspace</p>
+          </div>
+        </header>
+
+        <section class="panel topic-detail">
+          <div class="topic-detail-header">
+            <div>
+              <h2 data-question-heading>Loading question</h2>
+              <p>
+                <span data-question-category>Category</span> ·
+                <span data-question-difficulty>Difficulty</span>
+              </p>
+            </div>
+            <span class="learning-status" data-question-status>Loading</span>
+          </div>
+
+          <div class="topic-summary-grid">
+            <div class="topic-summary-item">
+              <span>Last reviewed</span>
+              <strong data-question-reviewed>Not recorded</strong>
+            </div>
+            <div class="topic-summary-item">
+              <span>Source</span>
+              <strong data-question-source>No source recorded</strong>
+            </div>
+            <div class="topic-summary-item">
+              <span>Review actions</span>
+              <strong>Practice deliberately</strong>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button class="button button-secondary" type="button" data-question-toggle-answer>
+              Hide answer
+            </button>
+            <button class="button" type="button" data-question-mastered>
+              Mark as Mastered
+            </button>
+            <button class="button button-danger" type="button" data-question-practice>
+              Mark Need Practice
+            </button>
+          </div>
+
+          <div class="interview-answer-panel" data-question-answer-panel aria-live="polite"></div>
+
+          <form class="interview-form" data-interview-detail-form>
+            <div class="interview-form-grid">
+              <div class="form-field interview-form-wide">
+                <label for="question-text">Question</label>
+                <input id="question-text" name="question" type="text" required />
+              </div>
+
+              <div class="form-field">
+                <label for="question-category">Category</label>
+                <select id="question-category" name="category" required>
+                  <option value="Behavioral">Behavioral</option>
+                  <option value="Technical">Technical</option>
+                  <option value="Support">Support</option>
+                  <option value="Situational">Situational</option>
+                  <option value="Company">Company</option>
+                  <option value="General">General</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="question-difficulty">Difficulty</label>
+                <select id="question-difficulty" name="difficulty" required>
+                  <option value="Easy">Easy</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Hard">Hard</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="question-status">Status</label>
+                <select id="question-status" name="status" required>
+                  <option value="New">New</option>
+                  <option value="Need Practice">Need Practice</option>
+                  <option value="In Review">In Review</option>
+                  <option value="Mastered">Mastered</option>
+                </select>
+              </div>
+
+              <div class="form-field interview-form-wide">
+                <label for="question-answer">Model answer</label>
+                <textarea id="question-answer" name="answer" rows="5"></textarea>
+              </div>
+
+              <div class="form-field interview-form-wide">
+                <label for="question-personal-answer">Personal answer</label>
+                <textarea id="question-personal-answer" name="personalAnswer" rows="5"></textarea>
+              </div>
+
+              <div class="form-field interview-form-wide">
+                <label for="question-notes">Notes</label>
+                <textarea id="question-notes" name="notes" rows="4"></textarea>
+              </div>
+
+              <div class="form-field">
+                <label for="question-tags">Tags</label>
+                <input id="question-tags" name="tags" type="text" />
+              </div>
+
+              <div class="form-field interview-form-source">
+                <label for="question-source">Source</label>
+                <input id="question-source" name="source" type="text" />
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button" type="submit">Save question</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

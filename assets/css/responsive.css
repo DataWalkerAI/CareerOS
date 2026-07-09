@@ -40,12 +40,16 @@
   .form-grid,
   .task-form-grid,
   .learning-form-grid,
+  .interview-form-grid,
+  .interview-toolbar,
+  .interview-layout,
   .jobs-toolbar,
   .tasks-toolbar,
   .learning-toolbar,
   .job-list-card,
   .task-card,
   .learning-card,
+  .interview-card,
   .topic-detail-grid,
   .topic-summary-grid,
   .topic-inline-form,
@@ -56,6 +60,8 @@
 
   .task-form-notes,
   .learning-form-wide,
+  .interview-form-wide,
+  .interview-form-source,
   .topic-detail-wide {
     grid-column: auto;
   }
@@ -64,9 +70,14 @@
     flex-direction: column;
   }
 
+  .topic-detail-actions {
+    justify-content: flex-start;
+  }
+
   .job-list-actions,
   .task-card-actions,
   .learning-card-actions,
+  .interview-card-actions,
   .workspace-item,
   .resource-card-header {
     justify-content: flex-start;
