@@ -1,0 +1,178 @@
+# 🚀 CareerOS
+
+> Personal Career Management Dashboard for IT Professionals
+
+CareerOS is a personal web application that helps manage the entire IT career journey in one place.
+
+It combines job applications, learning progress, daily tasks, portfolio tracking, interview preparation, and career planning into a single dashboard.
+
+---
+
+## 📸 Screenshot
+
+> *(Add a screenshot after every major release.)*
+
+---
+
+## ✨ Features
+
+### Dashboard
+
+- Career statistics
+- Active job application
+- Learning progress
+- Daily tasks
+- Quick navigation
+
+### Jobs Manager
+
+- Create jobs
+- Edit jobs
+- Delete jobs
+- Search
+- Filter
+- LocalStorage persistence
+
+### Tasks Manager
+
+- Create tasks
+- Edit tasks
+- Delete tasks
+- Mark completed
+- Search
+- Filter
+- LocalStorage persistence
+
+### Learning Center *(planned)*
+
+- Track learning progress
+- Study resources
+- Notes
+- Progress statistics
+
+---
+
+## 🛠 Tech Stack
+
+- HTML5
+- CSS3
+- Vanilla JavaScript (ES6+)
+- LocalStorage
+- Git
+- GitHub
+
+---
+
+## 📂 Project Structure
+
+```text
+CareerOS
+│
+├── assets/
+│   ├── css/
+│   ├── js/
+│   ├── icons/
+│   └── images/
+│
+├── CV/
+├── Jobs/
+├── Learning/
+├── Portfolio/
+├── docs/
+│
+├── index.html
+└── README.md
+```
+
+---
+
+## 🏗 Architecture
+
+```text
+UI
+ │
+ ▼
+Managers
+ │
+ ▼
+Storage
+ │
+ ▼
+LocalStorage
+```
+
+---
+
+## 🚀 Roadmap
+
+- ✅ Dashboard
+- ✅ Jobs Manager
+- ✅ Tasks Manager
+- ⏳ Learning Manager
+- ⏳ Dashboard Automation
+- ⏳ Notifications
+- ⏳ Portfolio
+- ⏳ Interview Center
+- ⏳ Settings
+- ⏳ PWA
+
+---
+
+## 📌 Current Version
+
+**v0.2.0**
+
+Latest completed sprint:
+
+- Jobs Manager
+- Tasks Manager
+- Dashboard Integration
+
+---
+
+## ▶ Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/DataWalkerAI/CareerOS.git
+```
+
+Open:
+
+```text
+index.html
+```
+
+No build tools are required.
+
+---
+
+## 📖 Documentation
+
+Project documentation is available in:
+
+```
+docs/
+```
+
+- Architecture
+- Roadmap
+- Changelog
+- Contributing Guide
+
+---
+
+## 👤 Author
+
+**DataWalkerAI**
+
+GitHub:
+
+https://github.com/DataWalkerAI
+
+---
+
+## 📄 License
+
+Currently under personal development.

@@ -114,8 +114,8 @@
           </div>
           <div class="card">
             <h3>Learning</h3>
-            <strong>18%</strong>
-            <small>CareerOS skill progress</small>
+            <strong data-stat="learning">0%</strong>
+            <small data-stat-label="learning">0 completed</small>
           </div>
           <div class="card">
             <h3>Tasks</h3>
@@ -243,99 +243,120 @@
           </section>
 
           <section id="learning" class="panel">
-            <h2>Learning Progress</h2>
-            <div class="learning-grid">
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>Windows 11</span>
-                  <span>20%</span>
+            <h2>Learning Manager</h2>
+
+            <form class="learning-form" data-learning-form>
+              <input type="hidden" name="learningId" />
+
+              <div class="learning-form-grid">
+                <div class="form-field">
+                  <label for="learning-title">Topic</label>
+                  <input id="learning-title" name="title" type="text" required />
                 </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 20%"></div>
+
+                <div class="form-field">
+                  <label for="learning-category">Category</label>
+                  <select id="learning-category" name="category" required>
+                    <option value="Windows">Windows</option>
+                    <option value="Networking">Networking</option>
+                    <option value="Microsoft 365">Microsoft 365</option>
+                    <option value="Identity">Identity</option>
+                    <option value="Web">Web</option>
+                  </select>
                 </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>Networking</span>
-                  <span>15%</span>
+
+                <div class="form-field">
+                  <label for="learning-status">Status</label>
+                  <select id="learning-status" name="status" required>
+                    <option value="Not started">Not started</option>
+                    <option value="In progress">In progress</option>
+                    <option value="Completed">Completed</option>
+                  </select>
                 </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 15%"></div>
+
+                <div class="form-field">
+                  <label for="learning-progress">Progress</label>
+                  <input
+                    id="learning-progress"
+                    name="progress"
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="0"
+                  />
                 </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>Microsoft 365</span>
-                  <span>10%</span>
+
+                <div class="form-field learning-form-wide">
+                  <label for="learning-notes">Notes</label>
+                  <textarea id="learning-notes" name="notes" rows="3"></textarea>
                 </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 10%"></div>
+
+                <div class="form-field learning-form-wide">
+                  <label for="learning-resources">Resources</label>
+                  <textarea
+                    id="learning-resources"
+                    name="resources"
+                    rows="3"
+                    placeholder="One resource per line"
+                  ></textarea>
                 </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>SharePoint</span>
-                  <span>0%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 0%"></div>
-                </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>Entra ID</span>
-                  <span>0%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 0%"></div>
-                </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>Active Directory</span>
-                  <span>18%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 18%"></div>
-                </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>Intune</span>
-                  <span>0%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 0%"></div>
-                </div>
-              </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>HTML</span>
-                  <span>35%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 35%"></div>
+
+                <div class="form-field learning-form-wide">
+                  <label for="learning-next-step">Next step</label>
+                  <input id="learning-next-step" name="nextStep" type="text" />
                 </div>
               </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>CSS</span>
-                  <span>30%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 30%"></div>
-                </div>
+
+              <div class="form-actions">
+                <button class="button" type="submit" data-learning-submit>
+                  Add topic
+                </button>
+                <button
+                  class="button button-secondary"
+                  type="button"
+                  data-learning-reset
+                >
+                  Clear
+                </button>
               </div>
-              <div class="progress-item">
-                <div class="progress-title">
-                  <span>JavaScript</span>
-                  <span>12%</span>
-                </div>
-                <div class="progress-bar">
-                  <div class="progress" style="width: 12%"></div>
-                </div>
+            </form>
+
+            <div class="learning-toolbar" aria-label="Learning filters">
+              <div class="form-field">
+                <label for="learning-search">Search</label>
+                <input
+                  id="learning-search"
+                  data-learning-search
+                  type="search"
+                  placeholder="Topic title"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="learning-filter-category">Category</label>
+                <select id="learning-filter-category" data-learning-category-filter>
+                  <option value="All">All categories</option>
+                  <option value="Windows">Windows</option>
+                  <option value="Networking">Networking</option>
+                  <option value="Microsoft 365">Microsoft 365</option>
+                  <option value="Identity">Identity</option>
+                  <option value="Web">Web</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="learning-filter-status">Status</label>
+                <select id="learning-filter-status" data-learning-status-filter>
+                  <option value="All">All statuses</option>
+                  <option value="Not started">Not started</option>
+                  <option value="In progress">In progress</option>
+                  <option value="Completed">Completed</option>
+                </select>
               </div>
             </div>
+
+            <div class="learning-list" data-learning-list aria-live="polite"></div>
           </section>
 
           <section id="tasks" class="panel">
@@ -417,10 +438,10 @@
               <a href="Learning/ActiveDirectory/"
                 ><i class="fa-solid fa-server"></i>Active Directory</a
               >
-              <a href="Learning/Networking/"
+              <a href="Learning/IT-Infrastructure/Networking/"
                 ><i class="fa-solid fa-network-wired"></i>Networking</a
               >
-              <a href="Learning/Microsoft365/"
+              <a href="Learning/IT-Infrastructure/Microsoft%20365/"
                 ><i class="fa-solid fa-cloud"></i>Microsoft 365</a
               >
             </div>

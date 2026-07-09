@@ -12,25 +12,12 @@ window.TasksManager = (() => {
     list: "[data-tasks-list]",
   };
 
-  function createId() {
-    return `task-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  }
-
-  function escapeHtml(value) {
-    return String(value || "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
   function formatNotes(value) {
-    return value ? escapeHtml(value) : "No notes";
+    return value ? window.CareerUtils.escapeHtml(value) : "No notes";
   }
 
   function formatDueDate(value) {
-    return value ? escapeHtml(value) : "No due date";
+    return value ? window.CareerUtils.escapeHtml(value) : "No due date";
   }
 
   function getFilteredTasks() {
@@ -71,7 +58,7 @@ window.TasksManager = (() => {
     const now = new Date().toISOString();
 
     return {
-      id: formData.get("taskId") || createId(),
+      id: formData.get("taskId") || window.CareerUtils.createId("task"),
       title: formData.get("title").trim(),
       notes: formData.get("notes").trim(),
       priority: formData.get("priority"),
@@ -160,30 +147,30 @@ window.TasksManager = (() => {
     list.innerHTML = filteredTasks
       .map(
         (task) => `
-          <article class="task-card ${task.completed ? "task-card-complete" : ""}" aria-labelledby="title-${escapeHtml(task.id)}">
+          <article class="task-card ${task.completed ? "task-card-complete" : ""}" aria-labelledby="title-${window.CareerUtils.escapeHtml(task.id)}">
             <div class="task-card-main">
               <input
-                id="complete-${escapeHtml(task.id)}"
+                id="complete-${window.CareerUtils.escapeHtml(task.id)}"
                 type="checkbox"
-                aria-label="Mark ${escapeHtml(task.title)} as ${task.completed ? "open" : "completed"}"
+                aria-label="Mark ${window.CareerUtils.escapeHtml(task.title)} as ${task.completed ? "open" : "completed"}"
                 ${task.completed ? "checked" : ""}
-                data-task-toggle="${escapeHtml(task.id)}"
+                data-task-toggle="${window.CareerUtils.escapeHtml(task.id)}"
               />
               <div>
-                <h3 id="title-${escapeHtml(task.id)}">${escapeHtml(task.title)}</h3>
+                <h3 id="title-${window.CareerUtils.escapeHtml(task.id)}">${window.CareerUtils.escapeHtml(task.title)}</h3>
                 <p>${formatNotes(task.notes)}</p>
                 <div class="task-meta">
                   <span>${task.completed ? "Completed" : "Open"}</span>
-                  <span>Priority: ${escapeHtml(task.priority)}</span>
+                  <span>Priority: ${window.CareerUtils.escapeHtml(task.priority)}</span>
                   <span>Due: ${formatDueDate(task.dueDate)}</span>
                 </div>
               </div>
             </div>
             <div class="task-card-actions">
-              <button class="button button-secondary button-small" type="button" data-task-edit="${escapeHtml(task.id)}">
+              <button class="button button-secondary button-small" type="button" data-task-edit="${window.CareerUtils.escapeHtml(task.id)}">
                 Edit
               </button>
-              <button class="button button-danger button-small" type="button" data-task-delete="${escapeHtml(task.id)}">
+              <button class="button button-danger button-small" type="button" data-task-delete="${window.CareerUtils.escapeHtml(task.id)}">
                 Delete
               </button>
             </div>

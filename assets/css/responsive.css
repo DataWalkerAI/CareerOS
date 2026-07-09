@@ -39,19 +39,34 @@
   .job-meta,
   .form-grid,
   .task-form-grid,
+  .learning-form-grid,
   .jobs-toolbar,
   .tasks-toolbar,
+  .learning-toolbar,
   .job-list-card,
-  .task-card {
+  .task-card,
+  .learning-card,
+  .topic-detail-grid,
+  .topic-summary-grid,
+  .topic-inline-form,
+  .workspace-item {
     grid-template-columns: 1fr;
   }
 
-  .task-form-notes {
+  .task-form-notes,
+  .learning-form-wide,
+  .topic-detail-wide {
     grid-column: auto;
   }
 
+  .topic-detail-header {
+    flex-direction: column;
+  }
+
   .job-list-actions,
-  .task-card-actions {
+  .task-card-actions,
+  .learning-card-actions,
+  .workspace-item {
     justify-content: flex-start;
   }
 }

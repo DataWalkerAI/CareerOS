@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Topic | CareerOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script defer src="../assets/js/utils.js"></script>
+    <script defer src="../assets/js/storage.js"></script>
+    <script defer src="../assets/js/learning-detail.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6dcb0c1b0b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+
+          <div class="logo-text">
+            <h2>CareerOS</h2>
+            <p>Learning Workspace</p>
+          </div>
+        </div>
+
+        <nav aria-label="Learning navigation">
+          <ul>
+            <li>
+              <a href="../index.html#learning" class="active"
+                ><i class="fa-solid fa-arrow-left"></i>Back to Learning</a
+              >
+            </li>
+            <li>
+              <a href="../index.html#dashboard"
+                ><i class="fa-solid fa-chart-line"></i>Dashboard</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <hr />
+
+        <div class="sidebar-footer">CareerOS v1.1</div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1 data-topic-title>Learning Topic</h1>
+            <p data-topic-subtitle>CareerOS learning workspace</p>
+          </div>
+        </header>
+
+        <section class="panel topic-detail" aria-live="polite">
+          <div class="topic-detail-header">
+            <div>
+              <h2 data-topic-heading>Loading topic</h2>
+              <p data-topic-category>Category</p>
+            </div>
+            <span class="learning-status" data-topic-status>Loading</span>
+          </div>
+
+          <div class="topic-summary-grid">
+            <div class="topic-summary-item">
+              <span>Progress</span>
+              <strong data-topic-progress-label>0%</strong>
+            </div>
+            <div class="topic-summary-item">
+              <span>Last study</span>
+              <strong data-topic-last-study>Not recorded</strong>
+            </div>
+            <div class="topic-summary-item">
+              <span>Next step</span>
+              <strong data-topic-next-step>No next step recorded.</strong>
+            </div>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress" data-topic-progress style="width: 0%"></div>
+          </div>
+
+          <form class="topic-workspace-form" data-topic-workspace-form>
+            <div class="form-field">
+              <label for="topic-current-focus">Current focus</label>
+              <input id="topic-current-focus" name="currentFocus" type="text" />
+            </div>
+
+            <div class="form-field">
+              <label for="topic-notes">Notes</label>
+              <textarea id="topic-notes" name="notes" rows="8"></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button class="button" type="submit">Save workspace</button>
+            </div>
+          </form>
+
+          <div class="topic-detail-grid">
+            <article class="topic-detail-block topic-detail-wide">
+              <h3>Resources</h3>
+
+              <form class="topic-inline-form" data-resource-form>
+                <div class="form-field">
+                  <label for="resource-title">Title</label>
+                  <input id="resource-title" name="title" type="text" required />
+                </div>
+                <div class="form-field">
+                  <label for="resource-url">URL</label>
+                  <input id="resource-url" name="url" type="url" />
+                </div>
+                <div class="form-field">
+                  <label for="resource-type">Type</label>
+                  <select id="resource-type" name="type" required>
+                    <option value="Official Docs">Official Docs</option>
+                    <option value="Microsoft Learn">Microsoft Learn</option>
+                    <option value="YouTube">YouTube</option>
+                    <option value="Book">Book</option>
+                    <option value="Article">Article</option>
+                    <option value="PDF">PDF</option>
+                    <option value="Course">Course</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <button class="button button-small" type="submit">Add resource</button>
+              </form>
+
+              <div class="resource-list" data-resource-list></div>
+            </article>
+
+            <article class="topic-detail-block topic-detail-wide">
+              <h3>Practice checklist</h3>
+
+              <form class="topic-inline-form" data-practice-form>
+                <div class="form-field">
+                  <label for="practice-title">Practice item</label>
+                  <input id="practice-title" name="title" type="text" required />
+                </div>
+                <button class="button button-small" type="submit">Add practice</button>
+              </form>
+
+              <div class="practice-list" data-practice-list></div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

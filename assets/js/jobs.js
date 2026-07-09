@@ -12,21 +12,8 @@ window.JobsManager = (() => {
     list: "[data-jobs-list]",
   };
 
-  function createId() {
-    return `job-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  }
-
-  function escapeHtml(value) {
-    return String(value || "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
   function formatValue(value) {
-    return value ? escapeHtml(value) : "Not recorded";
+    return value ? window.CareerUtils.escapeHtml(value) : "Not recorded";
   }
 
   function getFilteredJobs() {
@@ -64,7 +51,7 @@ window.JobsManager = (() => {
     const now = new Date().toISOString();
 
     return {
-      id: formData.get("jobId") || createId(),
+      id: formData.get("jobId") || window.CareerUtils.createId("job"),
       company: formData.get("company").trim(),
       position: formData.get("position").trim(),
       status: formData.get("status"),
@@ -150,20 +137,20 @@ window.JobsManager = (() => {
         (job) => `
           <article class="job-list-card">
             <div>
-              <h3>${escapeHtml(job.company)}</h3>
-              <p>${escapeHtml(job.position)}</p>
+              <h3>${window.CareerUtils.escapeHtml(job.company)}</h3>
+              <p>${window.CareerUtils.escapeHtml(job.position)}</p>
               <div class="job-list-meta">
-                <span>Status: ${escapeHtml(job.status)}</span>
+                <span>Status: ${window.CareerUtils.escapeHtml(job.status)}</span>
                 <span>Deadline: ${formatValue(job.deadline)}</span>
                 <span>Location: ${formatValue(job.location)}</span>
                 <span>Next: ${formatValue(job.nextAction)}</span>
               </div>
             </div>
             <div class="job-list-actions">
-              <button class="button button-secondary button-small" type="button" data-job-edit="${escapeHtml(job.id)}">
+              <button class="button button-secondary button-small" type="button" data-job-edit="${window.CareerUtils.escapeHtml(job.id)}">
                 Edit
               </button>
-              <button class="button button-danger button-small" type="button" data-job-delete="${escapeHtml(job.id)}">
+              <button class="button button-danger button-small" type="button" data-job-delete="${window.CareerUtils.escapeHtml(job.id)}">
                 Delete
               </button>
             </div>

@@ -4,6 +4,7 @@ window.CareerDashboard = (() => {
   let dashboardState = {
     jobs: [],
     tasks: [],
+    learning: [],
   };
 
   function formatValue(value) {
@@ -35,6 +36,10 @@ window.CareerDashboard = (() => {
     if (Array.isArray(nextState.tasks)) {
       dashboardState.tasks = nextState.tasks;
     }
+
+    if (Array.isArray(nextState.learning)) {
+      dashboardState.learning = nextState.learning;
+    }
   }
 
   function setStat(key, value) {
@@ -53,18 +58,29 @@ window.CareerDashboard = (() => {
     }
   }
 
-  function updateStats(jobs, tasks) {
+  function updateStats(jobs, tasks, learning) {
     const activeJobs = jobs.filter((job) => activeStatuses.includes(job.status));
     const interviews = jobs.filter((job) => job.status === "Interview");
     const offers = jobs.filter((job) => job.status === "Offer");
     const openTasks = tasks.filter((task) => !task.completed);
     const completedTasks = tasks.length - openTasks.length;
+    const completedLearning = learning.filter(
+      (topic) => topic.status === "Completed",
+    );
+    const averageLearning = learning.length
+      ? Math.round(
+          learning.reduce((sum, topic) => sum + Number(topic.progress || 0), 0) /
+            learning.length,
+        )
+      : 0;
 
     setStat("applications", activeJobs.length);
     setStat("interviews", interviews.length);
     setStat("offers", offers.length);
     setStat("tasks", openTasks.length);
+    setStat("learning", `${averageLearning}%`);
     setStatLabel("tasks", `${completedTasks} completed`);
+    setStatLabel("learning", `${completedLearning.length} completed`);
   }
 
   function updateCurrentJob(jobs) {
@@ -110,7 +126,11 @@ window.CareerDashboard = (() => {
 
   function update(nextState) {
     normalizeState(nextState);
-    updateStats(dashboardState.jobs, dashboardState.tasks);
+    updateStats(
+      dashboardState.jobs,
+      dashboardState.tasks,
+      dashboardState.learning,
+    );
     updateCurrentJob(dashboardState.jobs);
   }
 
