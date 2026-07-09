@@ -1,6 +1,11 @@
 window.CareerDashboard = (() => {
   const activeStatuses = ["Preparing", "Applied", "Interview", "Offer"];
 
+  let dashboardState = {
+    jobs: [],
+    tasks: [],
+  };
+
   function formatValue(value) {
     return value || "Not recorded yet";
   }
@@ -13,24 +18,53 @@ window.CareerDashboard = (() => {
     );
   }
 
-  function updateStats(jobs) {
+  function normalizeState(nextState) {
+    if (Array.isArray(nextState)) {
+      dashboardState.jobs = nextState;
+      return;
+    }
+
+    if (!nextState) {
+      return;
+    }
+
+    if (Array.isArray(nextState.jobs)) {
+      dashboardState.jobs = nextState.jobs;
+    }
+
+    if (Array.isArray(nextState.tasks)) {
+      dashboardState.tasks = nextState.tasks;
+    }
+  }
+
+  function setStat(key, value) {
+    const target = document.querySelector(`[data-stat="${key}"]`);
+
+    if (target) {
+      target.textContent = value;
+    }
+  }
+
+  function setStatLabel(key, value) {
+    const target = document.querySelector(`[data-stat-label="${key}"]`);
+
+    if (target) {
+      target.textContent = value;
+    }
+  }
+
+  function updateStats(jobs, tasks) {
     const activeJobs = jobs.filter((job) => activeStatuses.includes(job.status));
     const interviews = jobs.filter((job) => job.status === "Interview");
     const offers = jobs.filter((job) => job.status === "Offer");
+    const openTasks = tasks.filter((task) => !task.completed);
+    const completedTasks = tasks.length - openTasks.length;
 
-    const statMap = {
-      applications: activeJobs.length,
-      interviews: interviews.length,
-      offers: offers.length,
-    };
-
-    Object.entries(statMap).forEach(([key, value]) => {
-      const target = document.querySelector(`[data-stat="${key}"]`);
-
-      if (target) {
-        target.textContent = value;
-      }
-    });
+    setStat("applications", activeJobs.length);
+    setStat("interviews", interviews.length);
+    setStat("offers", offers.length);
+    setStat("tasks", openTasks.length);
+    setStatLabel("tasks", `${completedTasks} completed`);
   }
 
   function updateCurrentJob(jobs) {
@@ -74,9 +108,10 @@ window.CareerDashboard = (() => {
     }
   }
 
-  function update(jobs) {
-    updateStats(jobs);
-    updateCurrentJob(jobs);
+  function update(nextState) {
+    normalizeState(nextState);
+    updateStats(dashboardState.jobs, dashboardState.tasks);
+    updateCurrentJob(dashboardState.jobs);
   }
 
   return {

@@ -38,12 +38,20 @@
   .learning-grid,
   .job-meta,
   .form-grid,
+  .task-form-grid,
   .jobs-toolbar,
-  .job-list-card {
+  .tasks-toolbar,
+  .job-list-card,
+  .task-card {
     grid-template-columns: 1fr;
   }
 
-  .job-list-actions {
+  .task-form-notes {
+    grid-column: auto;
+  }
+
+  .job-list-actions,
+  .task-card-actions {
     justify-content: flex-start;
   }
 }
