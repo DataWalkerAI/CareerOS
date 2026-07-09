@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Manager | CareerOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <script defer src="../assets/js/utils.js"></script>
+    <script defer src="../assets/js/storage.js"></script>
+    <script defer src="../assets/js/dashboard.js"></script>
+    <script defer src="../assets/js/portfolio.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6dcb0c1b0b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-folder-open"></i>
+          </div>
+
+          <div class="logo-text">
+            <h2>CareerOS</h2>
+            <p>Portfolio Manager</p>
+          </div>
+        </div>
+
+        <nav aria-label="Portfolio navigation">
+          <ul>
+            <li>
+              <a href="../index.html#dashboard"
+                ><i class="fa-solid fa-chart-line"></i>Dashboard</a
+              >
+            </li>
+            <li>
+              <a href="../index.html#learning"
+                ><i class="fa-solid fa-graduation-cap"></i>Learning</a
+              >
+            </li>
+            <li>
+              <a href="../Interview/index.html"
+                ><i class="fa-solid fa-comments"></i>Interview</a
+              >
+            </li>
+            <li>
+              <a class="active" href="index.html"
+                ><i class="fa-solid fa-folder-open"></i>Portfolio</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <hr />
+
+        <div class="sidebar-footer">CareerOS v1.1</div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1>Portfolio Manager</h1>
+            <p>Track projects, proof of work, and portfolio-ready assets</p>
+          </div>
+        </header>
+
+        <section class="panel portfolio-manager">
+          <form class="portfolio-form" data-portfolio-form>
+            <input type="hidden" name="portfolioId" />
+
+            <div class="portfolio-form-grid">
+              <div class="form-field portfolio-form-wide">
+                <label for="portfolio-title">Project title</label>
+                <input id="portfolio-title" name="title" type="text" required />
+              </div>
+
+              <div class="form-field">
+                <label for="portfolio-type">Type</label>
+                <select id="portfolio-type" name="type" required>
+                  <option value="Web App">Web App</option>
+                  <option value="Automation">Automation</option>
+                  <option value="Documentation">Documentation</option>
+                  <option value="Case Study">Case Study</option>
+                  <option value="Lab">Lab</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label for="portfolio-status">Status</label>
+                <select id="portfolio-status" name="status" required>
+                  <option value="Planned">Planned</option>
+                  <option value="In progress">In progress</option>
+                  <option value="Portfolio ready">Portfolio ready</option>
+                  <option value="Archived">Archived</option>
+                </select>
+              </div>
+
+              <div class="form-field portfolio-form-wide">
+                <label for="portfolio-description">Description</label>
+                <textarea id="portfolio-description" name="description" rows="4"></textarea>
+              </div>
+
+              <div class="form-field portfolio-form-wide">
+                <label for="portfolio-tech-stack">Tech stack</label>
+                <input
+                  id="portfolio-tech-stack"
+                  name="techStack"
+                  type="text"
+                  placeholder="HTML, CSS, JavaScript"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="portfolio-github-url">GitHub URL</label>
+                <input id="portfolio-github-url" name="githubUrl" type="url" />
+              </div>
+
+              <div class="form-field">
+                <label for="portfolio-live-url">Live URL</label>
+                <input id="portfolio-live-url" name="liveUrl" type="url" />
+              </div>
+
+              <div class="form-field portfolio-form-wide">
+                <label for="portfolio-notes">Notes</label>
+                <textarea id="portfolio-notes" name="notes" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button class="button" type="submit" data-portfolio-submit>
+                Add project
+              </button>
+              <button class="button button-secondary" type="button" data-portfolio-reset>
+                Clear
+              </button>
+            </div>
+          </form>
+
+          <div class="portfolio-toolbar" aria-label="Portfolio filters">
+            <div class="form-field">
+              <label for="portfolio-search">Search</label>
+              <input
+                id="portfolio-search"
+                data-portfolio-search
+                type="search"
+                placeholder="Project, stack, notes"
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="portfolio-filter-type">Type</label>
+              <select id="portfolio-filter-type" data-portfolio-type-filter>
+                <option value="All">All types</option>
+                <option value="Web App">Web App</option>
+                <option value="Automation">Automation</option>
+                <option value="Documentation">Documentation</option>
+                <option value="Case Study">Case Study</option>
+                <option value="Lab">Lab</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label for="portfolio-filter-status">Status</label>
+              <select id="portfolio-filter-status" data-portfolio-status-filter>
+                <option value="All">All statuses</option>
+                <option value="Planned">Planned</option>
+                <option value="In progress">In progress</option>
+                <option value="Portfolio ready">Portfolio ready</option>
+                <option value="Archived">Archived</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="portfolio-list" data-portfolio-list aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

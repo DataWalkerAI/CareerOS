@@ -3,4 +3,5 @@ document.addEventListener("DOMContentLoaded", () => {
   window.TasksManager?.init();
   window.LearningManager?.init();
   window.InterviewManager?.init();
+  window.PortfolioManager?.init();
 });

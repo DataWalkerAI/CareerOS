@@ -1,5 +1,12 @@
 # Changelog
 
+## Sprint 7.0 - Portfolio Manager
+
+- Added Portfolio Manager at `Portfolio/index.html` with LocalStorage-backed project CRUD.
+- Added `assets/js/portfolio.js` for project search, type/status filters, edit, delete, and dashboard updates.
+- Added `careeros.portfolio` storage support with normalized project records and seed projects.
+- Added Portfolio dashboard statistics and sidebar navigation to the Portfolio Manager.
+
 ## Sprint 6.0 - Interview Center
 
 - Added Interview Center with CRUD question management, review mode, search, filters, and sorting.

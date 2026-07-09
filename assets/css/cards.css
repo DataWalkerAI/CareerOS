@@ -1086,6 +1086,118 @@
   color: var(--clr-text-light);
 }
 
+/* ---------- Portfolio Manager ---------- */
+
+.portfolio-manager {
+  max-width: 1180px;
+}
+
+.portfolio-form {
+  padding-bottom: var(--space-lg);
+
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.portfolio-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.portfolio-form-wide {
+  grid-column: 1 / -1;
+}
+
+.portfolio-toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(150px, 190px) minmax(160px, 210px);
+  gap: var(--space-md);
+
+  margin: var(--space-lg) 0;
+}
+
+.portfolio-list {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.portfolio-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-md);
+
+  padding: var(--space-md);
+
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+
+  background: var(--clr-background);
+
+  transition: transform var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.portfolio-card:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--clr-primary);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.portfolio-card-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+
+  margin-bottom: 0.75rem;
+}
+
+.portfolio-card-header h3 {
+  font-size: var(--font-size-lg);
+  overflow-wrap: anywhere;
+}
+
+.portfolio-card p {
+  margin-top: 0.75rem;
+
+  color: var(--clr-text-light);
+}
+
+.portfolio-meta,
+.portfolio-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.portfolio-stack {
+  gap: var(--space-sm);
+
+  margin-top: 0.75rem;
+}
+
+.portfolio-stack span {
+  padding: 0.2rem 0.55rem;
+
+  border: 1px solid var(--clr-border);
+  border-radius: 999px;
+
+  color: var(--clr-text-light);
+}
+
+.portfolio-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-end;
+  gap: var(--space-sm);
+}
+
 /* ---------- Quick Links ---------- */
 
 .quick-links {

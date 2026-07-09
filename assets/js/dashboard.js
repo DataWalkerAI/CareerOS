@@ -6,6 +6,7 @@ window.CareerDashboard = (() => {
     tasks: [],
     learning: [],
     interview: [],
+    portfolio: [],
   };
 
   function formatValue(value) {
@@ -45,6 +46,10 @@ window.CareerDashboard = (() => {
     if (Array.isArray(nextState.interview)) {
       dashboardState.interview = nextState.interview;
     }
+
+    if (Array.isArray(nextState.portfolio)) {
+      dashboardState.portfolio = nextState.portfolio;
+    }
   }
 
   function setStat(key, value) {
@@ -63,7 +68,7 @@ window.CareerDashboard = (() => {
     }
   }
 
-  function updateStats(jobs, tasks, learning, interview) {
+  function updateStats(jobs, tasks, learning, interview, portfolio) {
     const activeJobs = jobs.filter((job) => activeStatuses.includes(job.status));
     const jobInterviews = jobs.filter((job) => job.status === "Interview");
     const offers = jobs.filter((job) => job.status === "Offer");
@@ -71,6 +76,7 @@ window.CareerDashboard = (() => {
     const completedTasks = tasks.length - openTasks.length;
     const masteredQuestions = interview.filter((item) => item.status === "Mastered");
     const practiceQuestions = interview.filter((item) => item.status !== "Mastered");
+    const readyProjects = portfolio.filter((project) => project.status === "Portfolio ready");
     const completedLearning = learning.filter(
       (topic) => topic.status === "Completed",
     );
@@ -86,12 +92,14 @@ window.CareerDashboard = (() => {
     setStat("offers", offers.length);
     setStat("tasks", openTasks.length);
     setStat("learning", `${averageLearning}%`);
+    setStat("portfolio", portfolio.length);
     setStatLabel(
       "interviews",
       `${masteredQuestions.length} mastered, ${jobInterviews.length} job interviews`,
     );
     setStatLabel("tasks", `${completedTasks} completed`);
     setStatLabel("learning", `${completedLearning.length} completed`);
+    setStatLabel("portfolio", `${readyProjects.length} ready`);
   }
 
   function updateCurrentJob(jobs) {
@@ -106,6 +114,10 @@ window.CareerDashboard = (() => {
       location: document.querySelector("[data-current-job-location]"),
       action: document.querySelector("[data-current-job-action]"),
     };
+
+    if (!fields.company || !fields.position || !fields.status) {
+      return;
+    }
 
     if (!currentJob) {
       fields.company.textContent = "No job selected";
@@ -142,6 +154,7 @@ window.CareerDashboard = (() => {
       dashboardState.tasks,
       dashboardState.learning,
       dashboardState.interview,
+      dashboardState.portfolio,
     );
     updateCurrentJob(dashboardState.jobs);
   }

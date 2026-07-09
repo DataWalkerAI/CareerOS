@@ -3,6 +3,7 @@ window.CareerStorage = (() => {
   const tasksKey = "careeros.tasks";
   const learningKey = "careeros.learning";
   const interviewKey = "careeros.interview";
+  const portfolioKey = "careeros.portfolio";
   const seedTimestamp = "2026-07-09T00:00:00.000Z";
 
   const seedJobs = [
@@ -451,6 +452,37 @@ window.CareerStorage = (() => {
     },
   ];
 
+  const seedPortfolio = [
+    {
+      id: "portfolio-careeros",
+      title: "CareerOS",
+      type: "Web App",
+      status: "In progress",
+      description:
+        "A personal career operating system for jobs, tasks, learning, interview preparation, and portfolio tracking.",
+      techStack: ["HTML", "CSS", "Vanilla JavaScript", "LocalStorage"],
+      githubUrl: "",
+      liveUrl: "",
+      notes: "Use this project as a portfolio anchor for frontend structure and practical product thinking.",
+      createdAt: seedTimestamp,
+      updatedAt: seedTimestamp,
+    },
+    {
+      id: "portfolio-support-checklists",
+      title: "IT Support Checklists",
+      type: "Documentation",
+      status: "Planned",
+      description:
+        "A collection of troubleshooting checklists for Windows, DNS, Microsoft 365, and helpdesk workflows.",
+      techStack: ["Markdown", "IT Support", "Troubleshooting"],
+      githubUrl: "",
+      liveUrl: "",
+      notes: "Can be connected to Learning and Interview preparation topics.",
+      createdAt: seedTimestamp,
+      updatedAt: seedTimestamp,
+    },
+  ];
+
   function createSlug(value) {
     return window.CareerUtils.createSlug(value, "topic");
   }
@@ -557,6 +589,37 @@ window.CareerStorage = (() => {
     });
   }
 
+  function normalizeTechStack(techStack) {
+    if (Array.isArray(techStack)) {
+      return techStack.map((item) => String(item).trim()).filter(Boolean);
+    }
+
+    return String(techStack || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  function normalizePortfolioProjects(projects) {
+    return projects.map((project) => {
+      const now = project.createdAt || seedTimestamp;
+
+      return {
+        id: project.id || window.CareerUtils.createId("portfolio"),
+        title: project.title || "Untitled project",
+        type: project.type || "Web App",
+        status: project.status || "Planned",
+        description: project.description || "",
+        techStack: normalizeTechStack(project.techStack),
+        githubUrl: project.githubUrl || "",
+        liveUrl: project.liveUrl || "",
+        notes: project.notes || "",
+        createdAt: project.createdAt || now,
+        updatedAt: project.updatedAt || now,
+      };
+    });
+  }
+
   function readJobs() {
     try {
       const storedJobs = JSON.parse(localStorage.getItem(jobsKey));
@@ -657,14 +720,42 @@ window.CareerStorage = (() => {
     }
   }
 
+  function readPortfolio() {
+    try {
+      const storedPortfolio = JSON.parse(localStorage.getItem(portfolioKey));
+
+      if (Array.isArray(storedPortfolio)) {
+        const normalizedPortfolio = normalizePortfolioProjects(storedPortfolio);
+        savePortfolio(normalizedPortfolio);
+        return normalizedPortfolio;
+      }
+    } catch (error) {
+      console.warn("CareerOS could not read portfolio projects from LocalStorage.", error);
+    }
+
+    const portfolio = cloneData(seedPortfolio);
+    savePortfolio(portfolio);
+    return portfolio;
+  }
+
+  function savePortfolio(portfolio) {
+    try {
+      localStorage.setItem(portfolioKey, JSON.stringify(normalizePortfolioProjects(portfolio)));
+    } catch (error) {
+      console.warn("CareerOS could not save portfolio projects to LocalStorage.", error);
+    }
+  }
+
   return {
     readJobs,
     readTasks,
     readLearning,
     readInterview,
+    readPortfolio,
     saveJobs,
     saveTasks,
     saveLearning,
     saveInterview,
+    savePortfolio,
   };
 })();
