@@ -455,6 +455,10 @@ window.CareerStorage = (() => {
     return window.CareerUtils.createSlug(value, "topic");
   }
 
+  function cloneData(value) {
+    return JSON.parse(JSON.stringify(value));
+  }
+
   function normalizeLegacyResources(resources) {
     if (Array.isArray(resources)) {
       return resources.map((resource) => ({
@@ -487,7 +491,7 @@ window.CareerStorage = (() => {
     }
 
     if (Array.isArray(seedTopic?.practice)) {
-      return seedTopic.practice;
+      return cloneData(seedTopic.practice);
     }
 
     return [];
@@ -564,12 +568,17 @@ window.CareerStorage = (() => {
       console.warn("CareerOS could not read jobs from LocalStorage.", error);
     }
 
-    saveJobs(seedJobs);
-    return seedJobs;
+    const jobs = cloneData(seedJobs);
+    saveJobs(jobs);
+    return jobs;
   }
 
   function saveJobs(jobs) {
-    localStorage.setItem(jobsKey, JSON.stringify(jobs));
+    try {
+      localStorage.setItem(jobsKey, JSON.stringify(jobs));
+    } catch (error) {
+      console.warn("CareerOS could not save jobs to LocalStorage.", error);
+    }
   }
 
   function readTasks() {
@@ -583,12 +592,17 @@ window.CareerStorage = (() => {
       console.warn("CareerOS could not read tasks from LocalStorage.", error);
     }
 
-    saveTasks(seedTasks);
-    return seedTasks;
+    const tasks = cloneData(seedTasks);
+    saveTasks(tasks);
+    return tasks;
   }
 
   function saveTasks(tasks) {
-    localStorage.setItem(tasksKey, JSON.stringify(tasks));
+    try {
+      localStorage.setItem(tasksKey, JSON.stringify(tasks));
+    } catch (error) {
+      console.warn("CareerOS could not save tasks to LocalStorage.", error);
+    }
   }
 
   function readLearning() {
@@ -604,12 +618,17 @@ window.CareerStorage = (() => {
       console.warn("CareerOS could not read learning from LocalStorage.", error);
     }
 
-    saveLearning(seedLearning);
-    return seedLearning;
+    const learning = cloneData(seedLearning);
+    saveLearning(learning);
+    return learning;
   }
 
   function saveLearning(learning) {
-    localStorage.setItem(learningKey, JSON.stringify(enrichLearningTopics(learning)));
+    try {
+      localStorage.setItem(learningKey, JSON.stringify(enrichLearningTopics(learning)));
+    } catch (error) {
+      console.warn("CareerOS could not save learning topics to LocalStorage.", error);
+    }
   }
 
   function readInterview() {
@@ -625,12 +644,17 @@ window.CareerStorage = (() => {
       console.warn("CareerOS could not read interview questions from LocalStorage.", error);
     }
 
-    saveInterview(seedInterview);
-    return seedInterview;
+    const interview = cloneData(seedInterview);
+    saveInterview(interview);
+    return interview;
   }
 
   function saveInterview(interview) {
-    localStorage.setItem(interviewKey, JSON.stringify(normalizeInterviewQuestions(interview)));
+    try {
+      localStorage.setItem(interviewKey, JSON.stringify(normalizeInterviewQuestions(interview)));
+    } catch (error) {
+      console.warn("CareerOS could not save interview questions to LocalStorage.", error);
+    }
   }
 
   return {

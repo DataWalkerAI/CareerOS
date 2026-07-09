@@ -34,6 +34,10 @@ window.InterviewManager = (() => {
     return `Interview/question.html?id=${encodeURIComponent(question.id)}`;
   }
 
+  function getFormElement(form, name) {
+    return form?.elements?.[name] || null;
+  }
+
   function getFilteredQuestions() {
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
@@ -59,12 +63,15 @@ window.InterviewManager = (() => {
       })
       .sort((a, b) => {
         if (sortMode === "question-asc") {
-          return a.question.localeCompare(b.question);
+          return String(a.question || "").localeCompare(String(b.question || ""));
         }
 
         if (sortMode === "difficulty-asc") {
           const order = { Easy: 1, Medium: 2, Hard: 3 };
-          return (order[a.difficulty] || 99) - (order[b.difficulty] || 99);
+          const firstDifficulty = String(a.difficulty || "");
+          const secondDifficulty = String(b.difficulty || "");
+
+          return (order[firstDifficulty] || 99) - (order[secondDifficulty] || 99);
         }
 
         if (sortMode === "reviewed-asc") {
@@ -79,16 +86,27 @@ window.InterviewManager = (() => {
     window.CareerStorage.saveInterview(questions);
     renderQuestions();
     renderReview();
-    window.CareerDashboard.update({ interview: questions });
+    window.CareerDashboard?.update({ interview: questions });
   }
 
   function resetForm() {
     const form = document.querySelector(selectors.form);
     const submitButton = document.querySelector(selectors.submit);
 
+    if (!form) {
+      return;
+    }
+
     form.reset();
-    form.elements.interviewId.value = "";
-    submitButton.textContent = "Add question";
+    const interviewId = getFormElement(form, "interviewId");
+
+    if (interviewId) {
+      interviewId.value = "";
+    }
+
+    if (submitButton) {
+      submitButton.textContent = "Add question";
+    }
   }
 
   function getFormQuestion(form) {
@@ -97,15 +115,15 @@ window.InterviewManager = (() => {
 
     return {
       id: formData.get("interviewId") || window.CareerUtils.createId("interview"),
-      question: formData.get("question").trim(),
+      question: String(formData.get("question") || "").trim(),
       category: formData.get("category"),
       difficulty: formData.get("difficulty"),
-      answer: formData.get("answer").trim(),
-      personalAnswer: formData.get("personalAnswer").trim(),
-      notes: formData.get("notes").trim(),
+      answer: String(formData.get("answer") || "").trim(),
+      personalAnswer: String(formData.get("personalAnswer") || "").trim(),
+      notes: String(formData.get("notes") || "").trim(),
       tags: tagsFromText(formData.get("tags")),
       status: formData.get("status"),
-      source: formData.get("source").trim(),
+      source: String(formData.get("source") || "").trim(),
       lastReviewed: "",
       createdAt: now,
       updatedAt: now,
@@ -120,6 +138,7 @@ window.InterviewManager = (() => {
     const existingQuestion = questions.find((item) => item.id === question.id);
 
     if (!question.question) {
+      window.CareerUtils.showToast?.("Question is required", "error");
       return;
     }
 
@@ -142,22 +161,36 @@ window.InterviewManager = (() => {
     const submitButton = document.querySelector(selectors.submit);
     const question = questions.find((item) => item.id === questionId);
 
-    if (!question) {
+    if (!question || !form) {
       return;
     }
 
-    form.elements.interviewId.value = question.id;
-    form.elements.question.value = question.question;
-    form.elements.category.value = question.category;
-    form.elements.difficulty.value = question.difficulty;
-    form.elements.answer.value = question.answer;
-    form.elements.personalAnswer.value = question.personalAnswer;
-    form.elements.notes.value = question.notes;
-    form.elements.tags.value = tagsToText(question.tags);
-    form.elements.status.value = question.status;
-    form.elements.source.value = question.source;
-    submitButton.textContent = "Save question";
-    form.scrollIntoView({ behavior: "smooth", block: "center" });
+    const fields = {
+      interviewId: question.id,
+      question: question.question,
+      category: question.category,
+      difficulty: question.difficulty,
+      answer: question.answer,
+      personalAnswer: question.personalAnswer,
+      notes: question.notes,
+      tags: tagsToText(question.tags),
+      status: question.status,
+      source: question.source,
+    };
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const field = getFormElement(form, name);
+
+      if (field) {
+        field.value = value || "";
+      }
+    });
+
+    if (submitButton) {
+      submitButton.textContent = "Save question";
+    }
+
+    form.scrollIntoView?.({ behavior: "smooth", block: "center" });
   }
 
   function deleteQuestion(questionId) {
@@ -196,8 +229,7 @@ window.InterviewManager = (() => {
   }
 
   function pickRandomQuestion() {
-    const reviewPool =
-      getFilteredQuestions().filter((item) => item.status !== "Mastered") || questions;
+    const reviewPool = getFilteredQuestions().filter((item) => item.status !== "Mastered");
     const pool = reviewPool.length ? reviewPool : questions;
 
     if (!pool.length) {
@@ -213,7 +245,7 @@ window.InterviewManager = (() => {
   }
 
   function renderTags(tags) {
-    if (!tags.length) {
+    if (!Array.isArray(tags) || !tags.length) {
       return "";
     }
 
@@ -322,32 +354,32 @@ window.InterviewManager = (() => {
     const list = document.querySelector(selectors.list);
     const reviewCard = document.querySelector(selectors.reviewCard);
 
-    form.addEventListener("submit", handleSubmit);
-    resetButton.addEventListener("click", resetForm);
+    form?.addEventListener("submit", handleSubmit);
+    resetButton?.addEventListener("click", resetForm);
 
-    searchInput.addEventListener("input", (event) => {
+    searchInput?.addEventListener("input", (event) => {
       searchTerm = event.target.value;
       renderQuestions();
     });
 
-    categorySelect.addEventListener("change", (event) => {
+    categorySelect?.addEventListener("change", (event) => {
       categoryFilter = event.target.value;
       renderQuestions();
     });
 
-    statusSelect.addEventListener("change", (event) => {
+    statusSelect?.addEventListener("change", (event) => {
       statusFilter = event.target.value;
       renderQuestions();
     });
 
-    sortSelect.addEventListener("change", (event) => {
+    sortSelect?.addEventListener("change", (event) => {
       sortMode = event.target.value;
       renderQuestions();
     });
 
-    list.addEventListener("click", (event) => {
-      const editButton = event.target.closest("[data-interview-edit]");
-      const deleteButton = event.target.closest("[data-interview-delete]");
+    list?.addEventListener("click", (event) => {
+      const editButton = event.target.closest?.("[data-interview-edit]");
+      const deleteButton = event.target.closest?.("[data-interview-delete]");
 
       if (editButton) {
         editQuestion(editButton.dataset.interviewEdit);
@@ -358,11 +390,11 @@ window.InterviewManager = (() => {
       }
     });
 
-    reviewCard.addEventListener("click", (event) => {
-      const randomButton = event.target.closest("[data-review-random]");
-      const answerButton = event.target.closest("[data-review-answer]");
-      const masteredButton = event.target.closest("[data-review-mastered]");
-      const practiceButton = event.target.closest("[data-review-practice]");
+    reviewCard?.addEventListener("click", (event) => {
+      const randomButton = event.target.closest?.("[data-review-random]");
+      const answerButton = event.target.closest?.("[data-review-answer]");
+      const masteredButton = event.target.closest?.("[data-review-mastered]");
+      const practiceButton = event.target.closest?.("[data-review-practice]");
 
       if (randomButton) {
         pickRandomQuestion();
@@ -403,7 +435,7 @@ window.InterviewManager = (() => {
 
     renderQuestions();
     renderReview();
-    window.CareerDashboard.update({ interview: questions });
+    window.CareerDashboard?.update({ interview: questions });
   }
 
   return {

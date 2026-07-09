@@ -17,6 +17,14 @@ window.InterviewDetail = (() => {
     }
   }
 
+  function setFieldValue(form, name, value) {
+    const field = form?.elements?.[name];
+
+    if (field) {
+      field.value = value || "";
+    }
+  }
+
   function tagsToText(tags) {
     return Array.isArray(tags) ? tags.join(", ") : "";
   }
@@ -29,6 +37,10 @@ window.InterviewDetail = (() => {
   }
 
   function saveQuestion() {
+    if (!question) {
+      return;
+    }
+
     questions = questions.map((item) => (item.id === question.id ? question : item));
     window.CareerStorage.saveInterview(questions);
   }
@@ -37,6 +49,17 @@ window.InterviewDetail = (() => {
     setText("[data-question-title]", "Question not found");
     setText("[data-question-subtitle]", `No interview question matched ${requestedId || "the URL"}`);
     setText("[data-question-heading]", "Question not found");
+    setText("[data-question-status]", "Missing");
+    setText("[data-question-category]", "Category");
+    setText("[data-question-difficulty]", "Difficulty");
+    setText("[data-question-reviewed]", "Not recorded");
+    setText("[data-question-source]", "No source recorded");
+
+    const panel = document.querySelector(selectors.answerPanel);
+
+    if (panel) {
+      panel.innerHTML = '<p class="empty-state">Open Interview Center and choose a question.</p>';
+    }
   }
 
   function renderAnswerPanel() {
@@ -68,26 +91,26 @@ window.InterviewDetail = (() => {
       return;
     }
 
-    document.title = `${question.question} | CareerOS`;
+    document.title = `${question.question || "Interview Question"} | CareerOS`;
     setText("[data-question-title]", "Interview Question");
-    setText("[data-question-subtitle]", `${question.category} interview preparation`);
-    setText("[data-question-heading]", question.question);
-    setText("[data-question-status]", question.status);
-    setText("[data-question-category]", question.category);
-    setText("[data-question-difficulty]", question.difficulty);
+    setText("[data-question-subtitle]", `${question.category || "General"} interview preparation`);
+    setText("[data-question-heading]", question.question || "Untitled interview question");
+    setText("[data-question-status]", question.status || "New");
+    setText("[data-question-category]", question.category || "General");
+    setText("[data-question-difficulty]", question.difficulty || "Medium");
     setText("[data-question-reviewed]", window.CareerUtils.formatRelativeDate(question.lastReviewed));
     setText("[data-question-source]", question.source || "No source recorded");
 
     if (form) {
-      form.elements.question.value = question.question;
-      form.elements.category.value = question.category;
-      form.elements.difficulty.value = question.difficulty;
-      form.elements.answer.value = question.answer;
-      form.elements.personalAnswer.value = question.personalAnswer;
-      form.elements.notes.value = question.notes;
-      form.elements.tags.value = tagsToText(question.tags);
-      form.elements.status.value = question.status;
-      form.elements.source.value = question.source;
+      setFieldValue(form, "question", question.question);
+      setFieldValue(form, "category", question.category);
+      setFieldValue(form, "difficulty", question.difficulty);
+      setFieldValue(form, "answer", question.answer);
+      setFieldValue(form, "personalAnswer", question.personalAnswer);
+      setFieldValue(form, "notes", question.notes);
+      setFieldValue(form, "tags", tagsToText(question.tags));
+      setFieldValue(form, "status", question.status);
+      setFieldValue(form, "source", question.source);
     }
 
     renderAnswerPanel();
@@ -119,15 +142,15 @@ window.InterviewDetail = (() => {
     const formData = new FormData(form);
     const now = new Date().toISOString();
 
-    question.question = formData.get("question").trim();
+    question.question = String(formData.get("question") || "").trim();
     question.category = formData.get("category");
     question.difficulty = formData.get("difficulty");
-    question.answer = formData.get("answer").trim();
-    question.personalAnswer = formData.get("personalAnswer").trim();
-    question.notes = formData.get("notes").trim();
+    question.answer = String(formData.get("answer") || "").trim();
+    question.personalAnswer = String(formData.get("personalAnswer") || "").trim();
+    question.notes = String(formData.get("notes") || "").trim();
     question.tags = tagsFromText(formData.get("tags"));
     question.status = formData.get("status");
-    question.source = formData.get("source").trim();
+    question.source = String(formData.get("source") || "").trim();
     question.updatedAt = now;
 
     saveQuestion();
@@ -141,9 +164,9 @@ window.InterviewDetail = (() => {
     form?.addEventListener("submit", handleSubmit);
 
     document.addEventListener("click", (event) => {
-      const toggleAnswer = event.target.closest("[data-question-toggle-answer]");
-      const masteredButton = event.target.closest("[data-question-mastered]");
-      const practiceButton = event.target.closest("[data-question-practice]");
+      const toggleAnswer = event.target.closest?.("[data-question-toggle-answer]");
+      const masteredButton = event.target.closest?.("[data-question-mastered]");
+      const practiceButton = event.target.closest?.("[data-question-practice]");
 
       if (toggleAnswer) {
         answerVisible = !answerVisible;
