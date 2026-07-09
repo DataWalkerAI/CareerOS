@@ -49,7 +49,8 @@
   .topic-detail-grid,
   .topic-summary-grid,
   .topic-inline-form,
-  .workspace-item {
+  .workspace-item,
+  .resource-list {
     grid-template-columns: 1fr;
   }
 
@@ -66,7 +67,20 @@
   .job-list-actions,
   .task-card-actions,
   .learning-card-actions,
-  .workspace-item {
+  .workspace-item,
+  .resource-card-header {
     justify-content: flex-start;
+  }
+
+  .resource-card-header {
+    flex-direction: column;
+  }
+
+  .toast-container {
+    right: var(--space-md);
+    bottom: var(--space-md);
+    left: var(--space-md);
+
+    width: auto;
   }
 }

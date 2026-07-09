@@ -1,5 +1,14 @@
 # Changelog
 
+## Sprint 5.4 - UX Polish & Autosave
+
+- Removed the manual Learning workspace save button and replaced it with 500ms debounced autosave.
+- Added Saving/Saved autosave feedback, Cmd+S/Ctrl+S immediate save, and save toasts.
+- Added reusable toast notifications in `assets/js/utils.js` for workspace, resource, and practice actions.
+- Improved Learning resources with card-based rendering, type labels, URL/domain display, Open/Delete controls, empty states, and card transitions.
+- Added Practice checklist progress with completed counts, empty states, completion toasts, and row transitions.
+- Added relative last-study dates for Today, Yesterday, days ago, weeks ago, and older formatted dates.
+
 ## Sprint 5.3 - Learning Experience
 
 - Added a practical Learning topic workspace on `Learning/topic.html`.

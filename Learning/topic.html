@@ -100,9 +100,7 @@
               <textarea id="topic-notes" name="notes" rows="8"></textarea>
             </div>
 
-            <div class="form-actions">
-              <button class="button" type="submit">Save workspace</button>
-            </div>
+            <p class="autosave-status" data-autosave-status aria-live="polite"></p>
           </form>
 
           <div class="topic-detail-grid">
@@ -139,6 +137,16 @@
 
             <article class="topic-detail-block topic-detail-wide">
               <h3>Practice checklist</h3>
+
+              <div class="practice-progress" aria-label="Practice completion">
+                <div class="practice-progress-header">
+                  <span>Practice progress</span>
+                  <strong data-practice-progress-label>0%</strong>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" data-practice-progress style="width: 0%"></div>
+                </div>
+              </div>
 
               <form class="topic-inline-form" data-practice-form>
                 <div class="form-field">

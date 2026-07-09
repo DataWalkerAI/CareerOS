@@ -6,7 +6,7 @@
 - Tasks Manager with LocalStorage CRUD, search, filters, completion toggle, and dashboard stats.
 - Learning Manager with LocalStorage CRUD, search, category/status filters, and dashboard stats.
 - Universal Learning detail page.
-- Learning topic workspace with notes, current focus, resources, practice checklist, and last study tracking.
+- Learning topic workspace with debounced autosave, keyboard save, notes, current focus, resource cards, practice progress, toasts, and last study tracking.
 
 ## Next
 
