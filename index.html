@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Career Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <script defer src="assets/js/utils.js"></script>
+    <script defer src="assets/js/storage.js"></script>
+    <script defer src="assets/js/ui.js"></script>
+    <script defer src="assets/js/dashboard.js"></script>
+    <script defer src="assets/js/jobs.js"></script>
+    <script defer src="assets/js/learning.js"></script>
+    <script defer src="assets/js/tasks.js"></script>
+    <script defer src="assets/js/app.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6dcb0c1b0b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="logo">
+          <div class="logo-icon">
+            <i class="fa-solid fa-briefcase"></i>
+          </div>
+
+          <div class="logo-text">
+            <h2>CareerOS</h2>
+            <p>IT Career Dashboard</p>
+          </div>
+        </div>
+
+        <nav>
+          <ul>
+            <li>
+              <a class="active" href="#dashboard"
+                ><i class="fa-solid fa-chart-line"></i>Dashboard</a
+              >
+            </li>
+
+            <li>
+              <a href="#jobs"><i class="fa-solid fa-briefcase"></i>Jobs</a>
+            </li>
+
+            <li>
+              <a href="#learning"
+                ><i class="fa-solid fa-graduation-cap"></i>Learning</a
+              >
+            </li>
+
+            <li>
+              <a href="#skills"><i class="fa-solid fa-code"></i>Skills</a>
+            </li>
+
+            <li>
+              <a href="#portfolio"
+                ><i class="fa-solid fa-folder-open"></i>Portfolio</a
+              >
+            </li>
+
+            <li>
+              <a href="#cv"><i class="fa-solid fa-file"></i>CV</a>
+            </li>
+
+            <li>
+              <a href="#tasks"><i class="fa-solid fa-list-check"></i>Tasks</a>
+            </li>
+          </ul>
+        </nav>
+
+        <hr />
+
+        <div class="user-card">
+          <h3>DataWalker</h3>
+
+          <p>Future IT Coordinator</p>
+
+          <div class="status">Available for work</div>
+        </div>
+
+        <div class="sidebar-footer">CareerOS v1.1</div>
+      </aside>
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h1>Career Dashboard</h1>
+            <p>Road to IT Career in Norway</p>
+          </div>
+        </header>
+
+        <section id="dashboard" class="stats" aria-label="Career statistics">
+          <div class="card">
+            <h3>Applications</h3>
+            <strong data-stat="applications">0</strong>
+            <small>Active job applications</small>
+          </div>
+          <div class="card">
+            <h3>Interviews</h3>
+            <strong data-stat="interviews">0</strong>
+            <small>No interviews scheduled</small>
+          </div>
+          <div class="card">
+            <h3>Offers</h3>
+            <strong data-stat="offers">0</strong>
+            <small>Offer pipeline</small>
+          </div>
+          <div class="card">
+            <h3>Learning</h3>
+            <strong>18%</strong>
+            <small>CareerOS skill progress</small>
+          </div>
+          <div class="card">
+            <h3>Tasks</h3>
+            <strong data-stat="tasks">0</strong>
+            <small data-stat-label="tasks">Open tasks</small>
+          </div>
+        </section>
+
+        <div class="dashboard-grid">
+          <section id="jobs" class="panel panel-wide">
+            <h2>Jobs Manager</h2>
+
+            <article class="job" aria-labelledby="current-job-title">
+              <div class="job-header">
+                <div>
+                  <h3 id="current-job-title" data-current-job-company>
+                    No job selected
+                  </h3>
+                  <p data-current-job-position>Add your first application</p>
+                </div>
+                <span class="status" data-current-job-status>Empty</span>
+              </div>
+
+              <dl class="job-meta">
+                <div>
+                  <dt>Deadline</dt>
+                  <dd data-current-job-deadline>Not recorded yet</dd>
+                </div>
+                <div>
+                  <dt>Location</dt>
+                  <dd data-current-job-location>Not recorded yet</dd>
+                </div>
+                <div>
+                  <dt>Next action</dt>
+                  <dd data-current-job-action>Use the form below</dd>
+                </div>
+              </dl>
+
+              <a
+                class="button"
+                data-current-job-link
+                href="Jobs/asko-it-koordinator/job.html"
+              >
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                Open job details
+              </a>
+            </article>
+
+            <form class="job-form" data-job-form>
+              <input type="hidden" name="jobId" />
+
+              <div class="form-grid">
+                <div class="form-field">
+                  <label for="job-company">Company</label>
+                  <input id="job-company" name="company" type="text" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="job-position">Position</label>
+                  <input id="job-position" name="position" type="text" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="job-status">Status</label>
+                  <select id="job-status" name="status" required>
+                    <option value="Preparing">Preparing</option>
+                    <option value="Applied">Applied</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Offer">Offer</option>
+                    <option value="Rejected">Rejected</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="job-deadline">Deadline</label>
+                  <input id="job-deadline" name="deadline" type="date" />
+                </div>
+
+                <div class="form-field">
+                  <label for="job-location">Location</label>
+                  <input id="job-location" name="location" type="text" />
+                </div>
+
+                <div class="form-field">
+                  <label for="job-next-action">Next action</label>
+                  <input id="job-next-action" name="nextAction" type="text" />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="button" type="submit" data-job-submit>
+                  Add job
+                </button>
+                <button class="button button-secondary" type="button" data-job-reset>
+                  Clear
+                </button>
+              </div>
+            </form>
+
+            <div class="jobs-toolbar" aria-label="Job filters">
+              <div class="form-field">
+                <label for="job-search">Search</label>
+                <input
+                  id="job-search"
+                  data-job-search
+                  type="search"
+                  placeholder="Company or position"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="job-filter-status">Filter by status</label>
+                <select id="job-filter-status" data-job-filter>
+                  <option value="All">All statuses</option>
+                  <option value="Preparing">Preparing</option>
+                  <option value="Applied">Applied</option>
+                  <option value="Interview">Interview</option>
+                  <option value="Offer">Offer</option>
+                  <option value="Rejected">Rejected</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="jobs-list" data-jobs-list aria-live="polite"></div>
+          </section>
+
+          <section id="learning" class="panel">
+            <h2>Learning Progress</h2>
+            <div class="learning-grid">
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>Windows 11</span>
+                  <span>20%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 20%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>Networking</span>
+                  <span>15%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 15%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>Microsoft 365</span>
+                  <span>10%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 10%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>SharePoint</span>
+                  <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>Entra ID</span>
+                  <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>Active Directory</span>
+                  <span>18%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 18%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>Intune</span>
+                  <span>0%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 0%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>HTML</span>
+                  <span>35%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 35%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>CSS</span>
+                  <span>30%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 30%"></div>
+                </div>
+              </div>
+              <div class="progress-item">
+                <div class="progress-title">
+                  <span>JavaScript</span>
+                  <span>12%</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress" style="width: 12%"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="tasks" class="panel">
+            <h2>Tasks Manager</h2>
+
+            <form class="task-form" data-task-form>
+              <input type="hidden" name="taskId" />
+
+              <div class="task-form-grid">
+                <div class="form-field">
+                  <label for="task-title">Task</label>
+                  <input id="task-title" name="title" type="text" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="task-priority">Priority</label>
+                  <select id="task-priority" name="priority" required>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="task-due-date">Due date</label>
+                  <input id="task-due-date" name="dueDate" type="date" />
+                </div>
+
+                <div class="form-field task-form-notes">
+                  <label for="task-notes">Notes</label>
+                  <input id="task-notes" name="notes" type="text" />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="button" type="submit" data-task-submit>
+                  Add task
+                </button>
+                <button
+                  class="button button-secondary"
+                  type="button"
+                  data-task-reset
+                >
+                  Clear
+                </button>
+              </div>
+            </form>
+
+            <div class="tasks-toolbar" aria-label="Task filters">
+              <div class="form-field">
+                <label for="task-search">Search</label>
+                <input
+                  id="task-search"
+                  data-task-search
+                  type="search"
+                  placeholder="Task or notes"
+                />
+              </div>
+
+              <div class="form-field">
+                <label for="task-filter">Filter</label>
+                <select id="task-filter" data-task-filter>
+                  <option value="All">All tasks</option>
+                  <option value="Open">Open</option>
+                  <option value="Completed">Completed</option>
+                  <option value="High">High priority</option>
+                  <option value="Medium">Medium priority</option>
+                  <option value="Low">Low priority</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="tasks-list" data-tasks-list aria-live="polite"></div>
+          </section>
+
+          <section id="skills" class="panel">
+            <h2>Skills Focus</h2>
+            <div class="quick-links">
+              <a href="Learning/ActiveDirectory/"
+                ><i class="fa-solid fa-server"></i>Active Directory</a
+              >
+              <a href="Learning/Networking/"
+                ><i class="fa-solid fa-network-wired"></i>Networking</a
+              >
+              <a href="Learning/Microsoft365/"
+                ><i class="fa-solid fa-cloud"></i>Microsoft 365</a
+              >
+            </div>
+          </section>
+
+          <section id="portfolio" class="panel">
+            <h2>Portfolio</h2>
+            <div class="quick-links">
+              <a href="Portfolio/Projects/"
+                ><i class="fa-solid fa-diagram-project"></i>Projects</a
+              >
+              <a href="Portfolio/Certificates/"
+                ><i class="fa-solid fa-certificate"></i>Certificates</a
+              >
+              <a href="Portfolio/Skills/"
+                ><i class="fa-solid fa-code"></i>Skills</a
+              >
+            </div>
+          </section>
+
+          <section id="cv" class="panel">
+            <h2>CV</h2>
+            <div class="quick-links">
+              <a href="CV/cv-en.pdf"
+                ><i class="fa-solid fa-file-pdf"></i>CV English</a
+              >
+              <a href="CV/cv-no.pdf"
+                ><i class="fa-solid fa-file-pdf"></i>CV Norwegian</a
+              >
+            </div>
+          </section>
+        </div>
+
+        <footer class="dashboard-footer">
+          CareerOS v1.1 &middot; Sprint 2 Dashboard Polish &middot; HTML, CSS,
+          Vanilla JavaScript
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>

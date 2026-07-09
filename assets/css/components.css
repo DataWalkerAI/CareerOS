@@ -1,0 +1,100 @@
+/* кнопки, бейджі, списки */
+
+.quick-links a {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  padding: 1rem;
+
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+
+  background: var(--clr-background);
+  color: var(--clr-text-light);
+
+  transition: var(--transition);
+}
+
+.quick-links a:hover {
+  border-color: var(--clr-primary);
+  color: var(--clr-white);
+  transform: translateY(-2px);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  width: fit-content;
+
+  padding: 0.75rem 1rem;
+
+  border-radius: var(--radius-md);
+
+  background: var(--clr-primary);
+  color: var(--clr-white);
+
+  font-weight: var(--font-weight-bold);
+
+  transition: var(--transition);
+}
+
+.button:hover {
+  background: var(--clr-primary-hover);
+  transform: translateY(-2px);
+}
+
+.button-secondary {
+  background: var(--clr-surface-light);
+  color: var(--clr-text);
+}
+
+.button-secondary:hover {
+  background: var(--clr-border);
+}
+
+.button-danger {
+  background: var(--clr-danger);
+}
+
+.button-danger:hover {
+  background: #dc2626;
+}
+
+.button-small {
+  padding: 0.5rem 0.75rem;
+
+  font-size: var(--font-size-sm);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-field label {
+  color: var(--clr-text-muted);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+
+  padding: 0.75rem 0.85rem;
+
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-md);
+
+  background: var(--clr-background);
+  color: var(--clr-text);
+}
+
+.form-field input::placeholder {
+  color: var(--clr-text-muted);
+}

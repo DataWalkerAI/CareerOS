@@ -1,0 +1,167 @@
+/* ==========================================
+   Career Dashboard
+   reset.css
+   скидання стилів
+   ========================================== */
+
+/* ---------- Box sizing ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ---------- Reset ---------- */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- HTML ---------- */
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+/* ---------- Body ---------- */
+
+body {
+  min-height: 100vh;
+
+  background: var(--clr-background);
+  color: var(--clr-text);
+
+  font-family: var(--font-main);
+  font-size: var(--font-size-md);
+  line-height: var(--line-height);
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Images ---------- */
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------- Links ---------- */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ---------- Lists ---------- */
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* ---------- Buttons ---------- */
+
+button {
+  border: none;
+  outline: none;
+
+  background: none;
+
+  cursor: pointer;
+
+  font: inherit;
+}
+
+/* ---------- Inputs ---------- */
+
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+}
+
+/* ---------- Tables ---------- */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* ---------- Headings ---------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+}
+
+/* ---------- Paragraph ---------- */
+
+p {
+  color: var(--clr-text-light);
+}
+
+/* ---------- Selection ---------- */
+
+::selection {
+  background: var(--clr-primary);
+  color: white;
+}
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-sidebar);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-surface-light);
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-primary);
+}
+
+/* ---------- Focus ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--clr-primary);
+  outline-offset: 2px;
+}
+
+/* ---------- Utility ---------- */
+
+.hidden {
+  display: none !important;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-width {
+  width: 100%;
+}

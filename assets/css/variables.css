@@ -1,0 +1,96 @@
+/* ==========================================
+   Career Dashboard
+   variables.css
+   кольори, шрифти, відступи
+   ========================================== */
+
+:root {
+  /* ===== COLORS ===== */
+
+  --clr-background: #0f172a;
+  --clr-surface: #1e293b;
+  --clr-surface-light: #334155;
+
+  --clr-primary: #3b82f6;
+  --clr-primary-hover: #2563eb;
+
+  --clr-success: #22c55e;
+  --clr-warning: #f59e0b;
+  --clr-danger: #ef4444;
+
+  --clr-white: #ffffff;
+
+  --clr-text: #f8fafc;
+  --clr-text-light: #cbd5e1;
+  --clr-text-muted: #94a3b8;
+
+  --clr-border: #334155;
+
+  --clr-sidebar: #111827;
+  --clr-header: #1e293b;
+
+  /* ===== SHADOWS ===== */
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+  --shadow-lg: 0 15px 35px rgba(0, 0, 0, 0.3);
+
+  /* ===== BORDER ===== */
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* ===== SPACING ===== */
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* ===== TYPOGRAPHY ===== */
+
+  --font-main:
+    "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.75rem;
+  --font-size-2xl: 2.5rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --line-height: 1.6;
+
+  /* ===== TRANSITIONS ===== */
+
+  --transition-fast: 0.2s ease;
+
+  --transition: 0.3s ease;
+
+  --transition-slow: 0.5s ease;
+
+  /* ===== SIDEBAR ===== */
+
+  --sidebar-width: 270px;
+
+  /* ===== HEADER ===== */
+
+  --header-height: 80px;
+
+  /* ===== Z-INDEX ===== */
+
+  --z-sidebar: 100;
+  --z-header: 200;
+  --z-modal: 999;
+}

@@ -1,0 +1,49 @@
+/* адаптивність */
+
+@media (max-width: 1180px) {
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-wide {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 760px) {
+  .app {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: static;
+    height: auto;
+  }
+
+  .topbar {
+    position: static;
+  }
+
+  .main section,
+  .dashboard-grid,
+  .dashboard-footer {
+    margin: var(--space-md);
+  }
+
+  .stats,
+  .learning-grid,
+  .job-meta,
+  .form-grid,
+  .jobs-toolbar,
+  .job-list-card {
+    grid-template-columns: 1fr;
+  }
+
+  .job-list-actions {
+    justify-content: flex-start;
+  }
+}
